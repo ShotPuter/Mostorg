@@ -1,0 +1,12 @@
+ {% extends "base.html "%}
+
+{% block content %}
+{% include "slider.html" %}
+{% include "baner.html"  %}
+ {% include "new_products.html" with last_products=last_products %}
+ {% include "all_products.html" with products=products  category=category %}
+ 
+
+{% include "instagram.html" %}
+ {% include "footer.html" %}
+ {% endblock %}

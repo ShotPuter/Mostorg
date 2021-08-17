@@ -1,0 +1,377 @@
+ 
+{% extends "base.html" %}
+{% block content %}
+
+<br>
+            <br>
+            <br>
+ <!-- Begin Kenne's Content Wrapper Area -->
+            <div class="kenne-content_wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 order-2 order-lg-1">
+                            <div class="kenne-sidebar-catagories_area">
+                                <div class="kenne-sidebar_categories category-module">
+                                    <div class="kenne-categories_title">
+                                        <h5>Категории</h5>
+                                    </div>
+                                    <div class="sidebar-categories_menu">
+                                        <ul>
+                                            {% for category in categories %}
+                                            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="kenne-sidebar_categories list-product_area">
+                                    <div class="kenne-categories_title">
+                                        <h5>Последний добавленный</h5>
+                                    </div>
+                                    <div class="kenne-element-carousel list-product_slider list-product_slider-2 slider-nav" data-slick-options='{
+                                "slidesToShow": 1,
+                                "slidesToScroll": 1,
+                                "infinite": false,
+                                "arrows": false,
+                                "dots": false,
+                                "spaceBetween": 30,
+                                "rows" : 2
+                                }' data-slick-responsive='[
+                                {"breakpoint":992, "settings": {
+                                "slidesToShow": 2
+                                }},
+                                {"breakpoint":576, "settings": {
+                                "slidesToShow": 1
+                                }}
+                            ]'>
+                                    {% for item in products%}
+                                        <div class="product-item">
+                                            <div class="single-product">
+                                                <div class="product-img">
+                                                    <a href="single-product.html">
+                                                        <img class="primary-img" src="{{item.image.url}}" alt="Kenne's Product Image">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content">
+                                                    <div class="product-desc_info">
+                                                      
+                                                        <h3 class="product-name">
+                                                            <a href="single-product.html">
+                                                                {{item.name}}
+                                                            </a>
+                                                        </h3>
+                                                        <div class="price-box">
+                                                            <span class="new-price">{{item.price}} руб.</span>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-8 order-1 order-lg-2">
+                            <div class="shop-toolbar">
+                                <div class="product-view-mode">
+                                    <a class="active grid-3" data-target="gridview-3" data-toggle="tooltip" data-placement="top" title="Grid View"><i class="fa fa-th"></i></a>
+                                    <a class="list" data-target="listview" data-toggle="tooltip" data-placement="top" title="List View"><i class="fa fa-th-list"></i></a>
+                                </div>
+                                <div class="product-page_count">
+                                    <p>Показано 1–9 из {{products|length}} результатов</p>
+                                </div>
+                                <div class="product-item-selection_area">
+                                    <div class="product-short">
+                                        <label class="select-label">Сортировать по:</label>
+                                        <select class="nice-select myniceselect">
+                                            <option value="1">Дате добавления</option>
+                                            <option value="2">Цена, от низкой к высокой</option>
+                                            <option value="3">Цена, от высокой к низкой</option>
+                                            <option value="4">Рейтинг (высокий)</option>
+                                            <option value="5">Рейтинг (низкий)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-product-wrap grid gridview-3 row">
+                                
+
+                                {% for item in products %}
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img class="primary-img" src="{{item.image.url}}" alt="Kenne's Product Image">
+                                                    
+                                                </a>
+                                                {% if item.status == 'Лучшее' %}
+                                                <span class="sticker">Лучшее</span>
+                                                {% endif %}
+
+                                                {% if item.status == 'Скидка' %}
+
+                                                 <span class="sticker-2">Скидка</span>
+                                                 {% endif %}
+
+
+                                                <div class="add-actions">
+                                                    <ul>
+                                                        <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="Quick View"><i class="ion-ios-search"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="wishlist.html" data-toggle="tooltip" data-placement="right" title="Add To Wishlist">
+                                                                <i class="ion-ios-heart-outline"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="compare.html" data-toggle="tooltip" data-placement="right" title="Add To Compare">
+                                                                <i class="ion-ios-reload"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="cart.html" data-toggle="tooltip" data-placement="right" title="Add To cart"><i class="ion-bag"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <div class="product-desc_info">
+                                                    <h3 class="product-name"><a href="single-product.html">{{item.name}}</a></h3>
+                                                    <div class="price-box">
+                                                        <span class="new-price">{{item.price}}</span>
+
+                                                        
+                                                    </div>
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="list-product_item">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img src="{{item.image.url}}" alt="Kenne's Product Image">
+                                                </a>
+                                            </div>
+                                            <div class="product-content">
+                                                <div class="product-desc_info">
+                                                    <div class="price-box">
+                                                        <span class="new-price">{{item.price}} руб.</span>
+                                                        
+                                                    </div>
+                                                    <h6 class="product-name">{{item.name}}</h6>
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li><i class="ion-ios-star"></i></li>
+                                                            <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="product-short_desc">
+                                                        <p>
+                                                            {{item.title}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul>
+                                                        <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i class="ion-ios-search"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="cart.html" data-toggle="tooltip" data-placement="top" title="Add To cart"><i class="ion-bag"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Begin Kenne's Modal Area -->
+        <div class="modal fade modal-wrapper" id="exampleModalCenter">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="modal-inner-area sp-area row">
+                            <div class="col-lg-5">
+                                <div class="sp-img_area">
+                                    <div class="kenne-element-carousel sp-img_slider slick-img-slider" data-slick-options='{
+                                    "slidesToShow": 1,
+                                    "arrows": false,
+                                    "fade": true,
+                                    "draggable": false,
+                                    "swipe": false,
+                                    "asNavFor": ".sp-img_slider-nav"
+                                    }'>
+                                        <div class="single-slide red">
+                                            <img src="{{item.image.url}}" alt="Kenne's Product Image">
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="kenne-element-carousel sp-img_slider-nav arrow-style-2 arrow-style-3" data-slick-options='{
+                                   "slidesToShow": 4,
+                                    "asNavFor": ".sp-img_slider",
+                                   "focusOnSelect": true,
+                                   "arrows" : true,
+                                   "spaceBetween": 30
+                                  }' data-slick-responsive='[
+                                    {"breakpoint":1501, "settings": {"slidesToShow": 3}},
+                                    {"breakpoint":1200, "settings": {"slidesToShow": 2}},
+                                    {"breakpoint":992, "settings": {"slidesToShow": 4}},
+                                    {"breakpoint":768, "settings": {"slidesToShow": 3}},
+                                    {"breakpoint":575, "settings": {"slidesToShow": 2}}
+                                ]'>
+                                        <div class="single-slide red">
+                                            <img src="{{item.image.url}}" alt="Kenne's Product Thumnail">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-6">
+                                <div class="sp-content">
+                                    <div class="sp-heading">
+                                        <h5>{{item.name}}</h5>
+                                    </div>
+                                    <div class="rating-box">
+                                        <ul>
+
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li><i class="ion-android-star"></i></li>
+                                            <li class="silver-color"><i class="ion-android-star"></i></li>
+                                            <li class="silver-color"><i class="ion-android-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="price-box">
+                                        <span class="new-price new-price-2">{{item.price}} руб.</span>
+                                        
+                                    </div>
+                                    <div class="sp-essential_stuff">
+                                        <ul>
+                                            <li>Категория: {{item.category}}</li>
+                                            <li>Описание: {{item.description|safe}}</li>
+                                            
+                                            <li>Количество: {{item.stock}}</li>
+                                           
+                                            
+                                        </ul>
+                                    </div>
+                                    <div class="color-list_area">
+                                        <div class="color-list_heading">
+                                            <h4>Настройки цвета</h4>
+                                        </div>
+                                        <span class="sub-title">Цвет</span>
+                                        <div class="color-list">
+                                            <a href="javascript:void(0)" class="single-color active" data-swatch-color="red">
+                                                <span class="bg-red_color"></span>
+                                                <span class="color-text">Красный</span>
+                                            </a>
+                                            <a href="javascript:void(0)" class="single-color" data-swatch-color="orange">
+                                                <span class="burnt-orange_color"></span>
+                                                <span class="color-text">Оранжевый</span>
+                                            </a>
+                                            <a href="javascript:void(0)" class="single-color" data-swatch-color="brown">
+                                                <span class="brown_color"></span>
+                                                <span class="color-text">Коричневый</span>
+                                            </a>
+                                            <a href="javascript:void(0)" class="single-color" data-swatch-color="umber">
+                                                <span class="raw-umber_color"></span>
+                                                <span class="color-text">Умбер</span>
+                                            </a>
+                                            <a href="javascript:void(0)" class="single-color" data-swatch-color="black">
+                                                <span class="black_color"></span>
+                                                <span class="color-text">Черный</span>
+                                            </a>
+                                            <a href="javascript:void(0)" class="single-color" data-swatch-color="golden">
+                                                <span class="golden_color"></span>
+                                                <span class="color-text">Золотой</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="quantity">
+                                        <label>Количество</label>
+                                        <div class="cart-plus-minus">
+                                            <input class="cart-plus-minus-box" value="1" type="text">
+                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="kenne-group_btn">
+                                        <ul>
+                                            <li><a href="cart.html" class="add-to_cart">Добавить в карту</a></li>
+                                            <li><a href="cart.html"><i class="ion-android-favorite-outline"></i></a></li>
+                                            <li><a href="cart.html"><i class="ion-ios-shuffle-strong"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                   
+                             
+                      
+                      
+                    
+            
+            
+                                {% endfor %}
+                               
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="kenne-paginatoin-area">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <ul class="kenne-pagination-box primary-color">
+                                                    <li class="active"><a href="javascript:void(0)">1</a></li>
+                                                    <li><a href="javascript:void(0)">2</a></li>
+                                                    <li><a href="javascript:void(0)">3</a></li>
+                                                    <li><a href="javascript:void(0)">4</a></li>
+                                                    <li><a href="javascript:void(0)">5</a></li>
+                                                    <li><a class="Next" href="javascript:void(0)">Next</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kenne's Content Wrapper Area End Here -->
+
+
+{% block footer %}
+{% include "footer.html" with categories_footer1=categories_footer1 categories_footer2=categories_footer2 categories_footer3=categories_footer3 categories_footer4=categories_footer4 categories_footer5=categories_footer5 %}
+{% endblock %}
+{% endblock %}

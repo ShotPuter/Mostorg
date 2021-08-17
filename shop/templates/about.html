@@ -1,0 +1,91 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+            <br>
+            <br>
+
+<!-- Begin Contact Main Page Area -->
+ <!-- Begin Kenne's About Us Area -->
+            <div class="about-us-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="overview-content">
+                                <h2>Добро пожаловать в <span>Mostorg</span> !</h2>
+                                <p class="short_desc">
+                                    Торговое оборудование для магазинов: от крючка до витрин и стеллажей.
+                                    Продажа торгового оборудования - главная специализация нашего интернет-магазина.
+                                    Нам важно не просто помочь вам в создании удобного торгового помещения, но и сделать это с учетом современных тенденций и веяний. необходимо, чтобы магазин был удобным и привлекательным для посетителей, подталкивая их к покупке.
+                                    Поэтому перед тем, как купить торговое оборудование для магазина, нужно учесть специфику товара и его выкладки, особенности помещения и другие нюансы.
+                                    В этом и состоит наша задача - предоставить такое оснащение, которое позволило бы вашему бизнесу выполнять поставленные перед ним задачи.
+                                </br>
+                                </br>
+                                    <h6>Вы можете оставить заявку в разделе "Контакты" и мы подберем для вас лучший вариант.</h6>
+                                </p>
+                                <div class="kenne-about-us_btn-area">
+                                    <a class="about-us_btn" href="{% url 'shop:contact' %}">Контакты</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kenne's About Us Area End Here -->
+            <!-- Begin Kenne's Project Countdown Area -->
+            <div class="project-count-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="single-count text-center">
+                                <div class="count-icon">
+                                    <span class="ion-ios-briefcase-outline"></span>
+                                </div>
+                                <div class="count-title">
+                                    <h2 class="count">237</h2>
+                                    <span>Магазинов открылись вместе с нами</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="single-count text-center">
+                                <div class="count-icon">
+                                    <span class="ion-ios-wineglass-outline"></span>
+                                </div>
+                                <div class="count-title">
+                                    <h2 class="count">1000</h2>
+                                    <span>единиц продукции продаем каждый месяц</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="single-count text-center">
+                                <div class="count-icon">
+                                    <span class="ion-ios-lightbulb-outline"></span>
+                                </div>
+                                <div class="count-title">
+                                    <h2 class="count">5</h2>
+                                    <span>лет работаем</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="single-count text-center">
+                                <div class="count-icon">
+                                    <span class="ion-happy-outline"></span>
+                                </div>
+                                <div class="count-title">
+                                    <h2 class="count">2169</h2>
+                                    <span>Счастливых клиентов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kenne's Project Countdown Area End Here -->
+
+        {% block footer %}
+{% include "footer.html" with categories_footer1=categories_footer1 categories_footer2=categories_footer2 categories_footer3=categories_footer3 categories_footer4=categories_footer4 categories_footer5=categories_footer5 %}
+{% endblock %}
+{% endblock %}

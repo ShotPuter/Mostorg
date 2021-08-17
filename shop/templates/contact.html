@@ -1,0 +1,70 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+
+            <br>
+            <br>
+
+<!-- Begin Contact Main Page Area -->
+        <div class="contact-main-page">
+           <!--<div class="container">
+                <div id="google-map"></div>
+            </div>-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
+                        <div class="contact-page-side-content">
+                            <h3 class="contact-page-title"> Наши контакты</h3>
+                            <br>
+                            <div class="single-contact-block">
+                                <h4><i class="fa fa-fax"></i> Адрес</h4>
+                                <p>ТК САДОВОД 14-ый км мкад ЛИНИЯ 22 ПАВИЛЬОН 103</p>
+                            </div>
+                            <div class="single-contact-block">
+                                <h4><i class="fa fa-phone"></i> Телефон</h4>
+                                <p> +7 (925) 355-85-55 </p>
+                                <p> +7 (926) 751-77-77 </p>
+                            </div>
+                            <div class="single-contact-block last-child">
+                                <h4><i class="fa fa-envelope-o"></i> Почта</h4>
+                                <p>torgovoe_oborudovanie_msk@mail.ru</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 order-2 order-lg-1">
+                        <div class="contact-form-content">
+                            <h3 class="contact-page-title">Мы вам позвоним:</h3>
+                            <div class="contact-form">
+                                <form id="contact-form" action="{% url 'shop:callback' %}" method="post">
+
+                                    <div class="form-group">
+                                         {% csrf_token %}
+                                        <label>Имя: <span class="required">*</span></label>
+                                        <input type="text" name="name" id="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Телефон: <span class="required">*</span></label>
+                                        <input type="tel" name="phone" id="phone" required>
+                                    </div>
+                                    <div class="form-group form-group-2">
+                                        <label>Ваши пожелания:</label>
+                                        <textarea name="description" id="description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" value="submit" id="submit" class="kenne-contact-form_btn" name="submit">Отправить</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <p class="form-messege"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block footer %}
+{% include "footer.html" with categories_footer1=categories_footer1 categories_footer2=categories_footer2 categories_footer3=categories_footer3 categories_footer4=categories_footer4 categories_footer5=categories_footer5 %}
+{% endblock %}
+{% endblock %}

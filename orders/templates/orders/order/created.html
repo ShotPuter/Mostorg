@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+var  myAddress = "{% url 'shop:start_page' %}"; // адрес страницы, на которую нужно перейти
+var myTime = 0.15; // время в минутах, через которое надо перейти на другую страницу
+setTimeout ('location.href =  myAddress', myTime * 60 * 1000);
+</script>
+<br>
+<br>
+ <div class="checkout-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                       
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        
+                            <div class="checkbox-form">
+                                <h3>Спасибо что скупляетесь у нас</h3>
+                                <div class="row">
+    
+       
+                <h3 class="page-header">
+                </h3>
+                <p>Ваш заказ оформлен. Номер заказа <strong>{{ order.id }}</strong>. Наши менеджеры скоро свяжуться с вами! Через 10 секунд редирект.....</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    
+{% endblock %}
