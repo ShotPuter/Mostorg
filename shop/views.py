@@ -4,7 +4,7 @@ from .models import Category, Product, Callback
 from cart.forms import CartAddProductForm
 from .forms import CallbackForm
 from django.contrib import messages
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import redirect
 from django.views.generic import (
     ListView,
@@ -24,7 +24,7 @@ class ProductListView(ListView):
 
 def start_page(request):
     products = Product.objects.filter(available=True)
-    last_products = Product.objects.filter(available=True)[::8]
+    last_products = Product.objects.filter(available=True)[:8]
     categories = Category.objects.all()
     carts = Cart(request)
 
@@ -39,11 +39,15 @@ def start_page(request):
     categories_navbar2=[]
     categories_navbar3=[]
     categories_navbar4=[]
+    
     if len(categories)>8:
+        
         categories_navbar2=list_categories_8[1]
     if len(categories)>16:
+      
         categories_navbar3=list_categories_8[1]
     if len(categories)>24:
+        
         categories_navbar4=list_categories_8[1]
    
     list_categories_footer_6=categories
@@ -211,7 +215,8 @@ def about(request):
 
     return render(request, 'about.html', context)
 
-def product_list(request, category_slug=None):
+def product_list(request, category_slug=None, all=None, price_low=None, price_height=None, rathings_low=None, rathings_height=None):
+
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
@@ -220,7 +225,15 @@ def product_list(request, category_slug=None):
         products = Product.objects.filter(category=category)
 
     categories_len=len(categories)
-    
+
+    if request.GET.get('price_low'):
+        products=products.order_by("price")
+    if request.GET.get('price_height'):
+        products=products.order_by("price").reverse()
+    if request.GET.get('rathins_height'):
+        products=products.order_by("degree").reverse()
+    if request.GET.get('rathins_low'):
+        products=products.order_by("degree")
 
     
     list_categories_8 = categories
@@ -259,6 +272,18 @@ def product_list(request, category_slug=None):
         categories_footer4=list_categories_footer_6[3]
     if len(categories)>30:
         categories_footer5=list_categories_footer_6[4]
+
+    paginator = Paginator(products, 9)
+
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        products= paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+       products = paginator.page(paginator.num_pages) # Show 25 contacts per page
    
 
 

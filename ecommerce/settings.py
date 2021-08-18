@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+  
     
 ]
 
@@ -159,3 +160,4 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Basic',
     },
 }
+

@@ -1,8 +1,10 @@
  
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 
-<br>
+
+
             <br>
             <br>
  <!-- Begin Kenne's Content Wrapper Area -->
@@ -48,9 +50,9 @@
                                         <div class="product-item">
                                             <div class="single-product">
                                                 <div class="product-img">
-                                                    <a href="single-product.html">
-                                                        <img class="primary-img" src="{{item.image.url}}" alt="Kenne's Product Image">
-                                                    </a>
+                                                   
+                                                        <img class="primary-img" src="{% if item.image %} {{ item.image.url }} {% else %} {% static 'shop/img/default.jpg' %} {% endif %}" >
+                                                    
                                                 </div>
                                                 <div class="product-content">
                                                     <div class="product-desc_info">
@@ -87,26 +89,26 @@
                                 <div class="product-item-selection_area">
                                     <div class="product-short">
                                         <label class="select-label">Сортировать по:</label>
-                                        <select class="nice-select myniceselect">
+                                        <select class="nice-select myniceselect" onchange="top.location=this.value">
                                             <option value="1">Дате добавления</option>
-                                            <option value="2">Цена, от низкой к высокой</option>
-                                            <option value="3">Цена, от высокой к низкой</option>
-                                            <option value="4">Рейтинг (высокий)</option>
-                                            <option value="5">Рейтинг (низкий)</option>
+                                            <option value="./?price_low=1" >Цена, от низкой к высокой</option>
+                                            <option value="./?price_height=1">Цена, от высокой к низкой</option>
+                                            <option value="./?rathings_low=1">Рейтинг (высокий)</option>
+                                            <option value="/?rathings_height=1">Рейтинг (низкий)</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="shop-product-wrap grid gridview-3 row">
-                                
 
-                                {% for item in products %}
+                            <div class="shop-product-wrap grid gridview-3 row">
+                          
+{% for item in products %}
                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <a href="single-product.html">
-                                                    <img class="primary-img" src="{{item.image.url}}" alt="Kenne's Product Image">
+                                                    <img class="primary-img" src="{% if item.image %} {{ item.image.url }} {% else %} {% static 'shop/img/default.jpg' %} {% endif %}" alt="Kenne's Product Image">
                                                     
                                                 </a>
                                                 {% if item.status == 'Лучшее' %}
@@ -142,7 +144,7 @@
                                             </div>
                                             <div class="product-content">
                                                 <div class="product-desc_info">
-                                                    <h3 class="product-name"><a href="single-product.html">{{item.name}}</a></h3>
+                                                    <h3 class="product-name">{{item.name}}</a></h3>
                                                     <div class="price-box">
                                                         <span class="new-price">{{item.price}}</span>
 
@@ -166,8 +168,8 @@
                                     <div class="list-product_item">
                                         <div class="single-product">
                                             <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img src="{{item.image.url}}" alt="Kenne's Product Image">
+                                               
+                                                    <img src="{% if item.image %} {{ item.image.url }} {% else %} {% static 'shop/img/default.jpg' %} {% endif %}" alt="Kenne's Product Image">
                                                 </a>
                                             </div>
                                             <div class="product-content">
@@ -246,7 +248,7 @@
                                     {"breakpoint":575, "settings": {"slidesToShow": 2}}
                                 ]'>
                                         <div class="single-slide red">
-                                            <img src="{{item.image.url}}" alt="Kenne's Product Thumnail">
+                                            <img src="{% if item.image %} {{ item.image.url }} {% else %} {% static 'shop/img/default.jpg' %} {% endif %}" alt="Kenne's Product Thumnail">
                                         </div>
                                         
                                     </div>
@@ -345,19 +347,23 @@
                                 {% endfor %}
                                
                                 
+
+                                
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="kenne-paginatoin-area">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <ul class="kenne-pagination-box primary-color">
-                                                    <li class="active"><a href="javascript:void(0)">1</a></li>
-                                                    <li><a href="javascript:void(0)">2</a></li>
-                                                    <li><a href="javascript:void(0)">3</a></li>
-                                                    <li><a href="javascript:void(0)">4</a></li>
-                                                    <li><a href="javascript:void(0)">5</a></li>
-                                                    <li><a class="Next" href="javascript:void(0)">Next</a></li>
+                                                     {% if products.has_previous %}
+                                                     <li><a href="?page={{ products.previous_page_number }}">Назад</a></li>
+                                                        {% endif %}
+                                                    
+                                                   {% if products.has_next %}
+                                                    <li><a class="Next" href="?page={{ products.next_page_number }}">Вперед</a></li>
+                                                     {% endif %}
                                                 </ul>
                                             </div>
                                         </div>
@@ -369,6 +375,11 @@
                 </div>
             </div>
             <!-- Kenne's Content Wrapper Area End Here -->
+
+
+    
+
+
 
 
 {% block footer %}

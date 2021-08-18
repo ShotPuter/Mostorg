@@ -41,10 +41,11 @@ class Product(models.Model):
     stock = models.PositiveIntegerField("Количество",)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField("Фото",upload_to=get_upload_path, blank=True)
+    image = models.ImageField("Фото",upload_to=get_upload_path)
+      
     STATUS_CHOICES = (('Лучшее', 'Лучшее'),
                     ('Скидка', 'Скидка'))
-    status = models.CharField('Статус', max_length=8, choices=STATUS_CHOICES)
+    status = models.CharField('Статус', max_length=8, choices=STATUS_CHOICES, blank=True )
     degree = models.PositiveIntegerField('Оценка (звезд)')
 
                     
