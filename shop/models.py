@@ -75,4 +75,13 @@ class Callback(models.Model):
         return self.phone
 
 
-        
+class Banner(models.Model):
+    name = models.CharField("Название/титл", max_length=300)
+    description = RichTextField("Описание",config_name='awesome_ckeditor')
+    image = models.ImageField("Изображение")
+
+    class Meta:
+        verbose_name='Банер'
+        verbose_name_plural = 'Банера'
+
+    

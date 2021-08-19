@@ -1,6 +1,6 @@
  <!-- Begin Slider Area -->
-        <div class="slider-area">
-
+        
+<!--
             <div class="kenne-element-carousel home-slider arrow-style" data-slick-options='{
                 "slidesToShow": 1,
                 "slidesToScroll": 1,
@@ -47,9 +47,9 @@
             </div>
 
         </div>
-        <!-- Slider Area End Here -->
+      
 
-<!-- Begin Service Area -->
+
         <div class="service-area">
             <div class="container">
                 <div class="service-nav">
@@ -80,5 +80,141 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://bootstraptema.ru/_sf/3/358.css" />
+<script type="text/javascript" src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
+
+{% load user_agents %}
+{% if request|is_mobile %}
+   
+{% endif %}
+{% if request|is_tablet %}
+   
+{% endif %}
+
+{% if request|is_pc %}
+    <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endif %}
+
+<style type="text/css"> 
+
+.btn.btn-hero,
+.btn.btn-hero:hover,
+.btn.btn-hero:focus {
+ color: #fff;
+ background-color: #000000;
+ border-color: rgb(255 215,0);
+ outline: none;
+ margin: 20px auto;
+}
+
+</style>
+
+<style>
+
+.stroke {
+    font: bold 3em Arial, sans-serif;
+    color: #0d3967;
+    text-shadow: #cad5e2 1px 1px 0, #cad5e2 2px 2px 0, 
+                 #cad5e2 3px 3px 0, #cad5e2 4px 4px 0, 
+                 #cad5e2 5px 5px 0;
+             }
+
+ h1 {
+    font-family: "Arial Black", Arial, sans-serif;
+
+   } 
+
+
+   * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.b-slide {
+    width: 320px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.b-slide > img {
+    position: relative;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+</style>
+
+
+<div class="container"><div class="row">
+
+<div class="col-md-12">
+
+<div id="myCarousel" class="carousel slide carousel-slideFullOut" data-ride="carousel">
+ <ol class="carousel-indicators">
+ <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+ {% for banner in banners %}
+ <li data-target="#myCarousel" data-slide-to="{{ forloop.counter }}"></li>
+ {% endfor %}
+ </ol>
+ <div class="carousel-inner">
+
+ <div class="item active">
+    <div class="b-slide"><img src="{{ baner_first.image.url }}" alt="Адаптивные элементы для сайта"></div>
+ 
+ <div class="container">
+ <div class="carousel-caption">
+    
+<p> <font size="30"  ><h1 class="stroke" style="color:#000000;"> {{ baner_first.name}} </h1></font></p>
+    <div style="color:#000000;"> {{  baner_first.description|safe }}</div>
+
+
+    
+                                   <p> <a href="{% url 'shop:product_list' %}" > <button class="btn btn-hero btn-lg" role="button">Перейти в каталог</button></a></p>
+                                
+ </div>
+ </div>
+ </div>
+
+ 
+
+ {% for baner in banners %}
+
+ <div class="item">
+    <div class="b-slide"><img src="{{baner.image.url}}" alt="Адаптивные элементы для сайта"></div>
+ 
+ <div class="container">
+ <div class="carousel-caption">
+    
+<p> <font size="30"  ><h1 class="stroke" style="color:#000000;"> {{baner.name}} </h1></font></p>
+    <div style="color:#000000;">{{baner.description|safe}}</div>
+
+
+    
+                                   <p> <a href="{% url 'shop:product_list' %}" > <button class="btn btn-hero btn-lg" role="button">Перейти в каталог</button></a></p>
+                                
+ </div>
+ </div>
+ </div>
+{% endfor %}
+ </div>
+ <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+ <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+ </div>
+
+</div>
+
+</div></div>
