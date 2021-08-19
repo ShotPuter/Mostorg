@@ -1,35 +1,48 @@
  {% load static %}
+<style type="text/css">
+    
+    .image {
+    position    : relative;
+    width       : 100%; /* for IE 6 */
+}
 
+h2 {
+    position    : absolute;
+    top     : 180px;
+    left        : 0;
+    width       : 100%;
+    
+}
+h2 span {
+    color           : white;
+    font            : bold 24px/45px Helvetica, Sans-Serif;
+    letter-spacing      : -1px;
+    background      : rgb(0, 0, 0); /* на случай, если следующая строка не сработает */
+    background      : rgba(0, 0, 0, 0.7);
+    padding         : 10px;
+}
+</style>
  <div class="banner-area">
             <div class="container">
                 <div class="row">
+
+                    {% for category in category %}
                     <div class="col-md-4 col-6 custom-xxs-col">
                         <div class="banner-item img-hover_effect">
+                            <div class="image">
                             <div class="banner-img">
-                                <a href="javascrip:void(0)">
-                                    <img src="{% static 'shop/assets/images/banner/1.jpg' %}" alt="Banner">
+                                <a href="{{category.get_absolute_url}}">
+                                    <img src="{{category.image.url}}" alt="Banner">
+                                    
                                 </a>
+                                <h2 > <span>{{category.name}}</span></h2>
+                            </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-6 custom-xxs-col">
-                        <div class="banner-item img-hover_effect">
-                            <div class="banner-img">
-                                <a href="javascrip:void(0)">
-                                    <img src="{% static 'shop/assets/images/banner/2.jpg' %}" alt="Banner">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-6 custom-xxs-col">
-                        <div class="banner-item img-hover_effect">
-                            <div class="banner-img">
-                                <a href="javascrip:void(0)">
-                                    <img src="{% static 'shop/assets/images/banner/3.jpg' %}" alt="Banner">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                    {% endfor %}
+                   
             </div>
         </div>
+    </div>

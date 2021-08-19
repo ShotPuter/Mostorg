@@ -2,11 +2,12 @@
 
 {% block content %}
 {% include "slider.html" %}
-{% include "baner.html"  %}
+{% include "baner.html" with category=categories  %}
+
  {% include "new_products.html" with last_products=last_products %}
  {% include "all_products.html" with products=products  category=category %}
  
-
+{% include "testominals.html" with testominals=testominals testominal_first=testominal_first%}
 {% include "instagram.html" %}
  {% include "footer.html" %}
  {% endblock %}

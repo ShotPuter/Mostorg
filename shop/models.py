@@ -9,6 +9,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=150, unique=True, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField('Изображение')
 
     class Meta:
         ordering = ('name',)
@@ -85,3 +86,16 @@ class Banner(models.Model):
         verbose_name_plural = 'Банера'
 
     
+class Testominal(models.Model):
+    name=models.CharField("Имя Фамилия", max_length=200)
+    work=models.CharField("Должность",max_length=200,blank=True)
+    text = models.TextField("Текст")
+    image=models.ImageField("Фото")
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+
+    def __str__(self):
+        return self.name
+    
+        

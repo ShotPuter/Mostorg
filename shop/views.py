@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from .models import Category, Product, Callback, Banner
+from .models import Category, Product, Callback, Banner, Testominal
 from cart.forms import CartAddProductForm
 from .forms import CallbackForm
 from django.contrib import messages
@@ -23,11 +23,14 @@ class ProductListView(ListView):
 '''
 
 def start_page(request):
+    
     products = Product.objects.filter(available=True)
     baner_first = Banner.objects.all().first()
     b=len(Banner.objects.all())
     banners=Banner.objects.all()[1:b]
-
+    t=len(Testominal.objects.all())
+    testominal_first=Testominal.objects.all().first()
+    testominals=Testominal.objects.all()[1:t]
     last_products = Product.objects.filter(available=True)[:8]
     categories = Category.objects.all()
     carts = Cart(request)
@@ -83,6 +86,8 @@ def start_page(request):
         'products': products,
         'last_products': last_products,
         'categories': categories,
+        'testominals': testominals,
+        'testominal_first': testominal_first,
         'categories_navbar1': categories_navbar1,
         'categories_navbar2': categories_navbar2,
         'categories_navbar3': categories_navbar3,

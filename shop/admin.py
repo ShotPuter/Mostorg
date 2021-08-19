@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Product, Callback, Banner
+from .models import Category, Product, Callback, Banner, Testominal
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -33,3 +33,8 @@ class BanerAdmin(admin.ModelAdmin):
 	list_display=['name','description']
 
 admin.site.register(Banner,BanerAdmin)
+
+class TestominalAdmin(admin.ModelAdmin):
+	list_display=['name']
+
+admin.site.register(Testominal,TestominalAdmin)
