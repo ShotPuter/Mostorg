@@ -4,8 +4,19 @@
 
 {% block content %}
 
+{% load user_agents %}
+{% if request|is_mobile %}
+   
+{% endif %}
+{% if request|is_tablet %}
+   
+{% endif %}
+
+{% if request|is_pc %}
+    <br>
 <br>
 <br>
+{% endif %}
 <div class="kenne-cart-area">
             <div class="container">
                 <div class="row">

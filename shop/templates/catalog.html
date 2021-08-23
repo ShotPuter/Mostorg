@@ -4,9 +4,20 @@
 {% load static %}
 
 
+{% load user_agents %}
+{% if request|is_mobile %}
+   
+{% endif %}
+{% if request|is_tablet %}
+   
+{% endif %}
 
-            <br>
-            <br>
+{% if request|is_pc %}
+    <br>
+<br>
+<br>
+{% endif %}
+            
  <!-- Begin Kenne's Content Wrapper Area -->
             <div class="kenne-content_wrapper">
                 <div class="container">
@@ -15,13 +26,22 @@
                             <div class="kenne-sidebar-catagories_area">
                                 <div class="kenne-sidebar_categories category-module">
                                     <div class="kenne-categories_title">
-                                        <h5>Категории</h5>
+                                       
+                                          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+           <h5>Категории</h5>
+        </button>
                                     </div>
                                     <div class="sidebar-categories_menu">
+
                                         <ul>
+                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+          <li><a href="{% url 'shop:product_list' %}">Все</a></li>
                                             {% for category in categories %}
                                             <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
                                             {% endfor %}
+                                        </div>
+                                    </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -107,7 +127,7 @@
                                     <div class="product-item">
                                         <div class="single-product">
                                             <div class="product-img">
-                                                <a href="single-product.html">
+                                                <a href="{% url 'cart:cart_add' item.id %}">
                                                     <img class="primary-img" src="{% if item.image %} {{ item.image.url }} {% else %} {% static 'shop/img/default.jpg' %} {% endif %}" alt="Kenne's Product Image">
                                                     
                                                 </a>
@@ -127,17 +147,7 @@
                                                             <a href="javascript:void(0)" data-toggle="tooltip" data-placement="right" title="Quick View"><i class="ion-ios-search"></i></a>
                                                         </li>
                                                         <li>
-                                                            <a href="wishlist.html" data-toggle="tooltip" data-placement="right" title="Add To Wishlist">
-                                                                <i class="ion-ios-heart-outline"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="compare.html" data-toggle="tooltip" data-placement="right" title="Add To Compare">
-                                                                <i class="ion-ios-reload"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-toggle="tooltip" data-placement="right" title="Add To cart"><i class="ion-bag"></i></a>
+                                                            <a href="{% url 'cart:cart_add' item.id %}" data-toggle="tooltip" data-placement="right" title="Add To cart"><i class="ion-bag"></i></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -150,17 +160,96 @@
 
                                                         
                                                     </div>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li class="silver-color">
+                                                     <div class="rating-box">
+                                                <ul>
+                                                    {% if item.degree == 0 %}
+                                                    <li class="silver-color">
                                                                 <i class="ion-ios-star-outline"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                     </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+                                                     {% if item.degree == 1 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                     </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+                                                    {% endif %}
+                                                   
+
+                                                    {% if item.degree == 2 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+                                                     {% if item.degree == 3 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+
+                                                     {% if item.degree == 4 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+
+                                                    {% if item.degree == 5 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,17 +268,96 @@
                                                         
                                                     </div>
                                                     <h6 class="product-name">{{item.name}}</h6>
-                                                    <div class="rating-box">
-                                                        <ul>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li><i class="ion-ios-star"></i></li>
-                                                            <li class="silver-color">
+                                                      <div class="rating-box">
+                                                <ul>
+                                                    {% if item.degree == 0 %}
+                                                    <li class="silver-color">
                                                                 <i class="ion-ios-star-outline"></i>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                     </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+                                                     {% if item.degree == 1 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                     </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+                                                    {% endif %}
+                                                   
+
+                                                    {% if item.degree == 2 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+                                                     {% if item.degree == 3 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+
+                                                     {% if item.degree == 4 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+
+                                                    {% if item.degree == 5 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
                                                     <div class="product-short_desc">
                                                         <p>
                                                             {{item.title}}
@@ -259,16 +427,96 @@
                                     <div class="sp-heading">
                                         <h5>{{item.name}}</h5>
                                     </div>
-                                    <div class="rating-box">
-                                        <ul>
+                                     <div class="rating-box">
+                                                <ul>
+                                                    {% if item.degree == 0 %}
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                     </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
 
-                                            <li><i class="ion-android-star"></i></li>
-                                            <li><i class="ion-android-star"></i></li>
-                                            <li><i class="ion-android-star"></i></li>
-                                            <li class="silver-color"><i class="ion-android-star"></i></li>
-                                            <li class="silver-color"><i class="ion-android-star"></i></li>
-                                        </ul>
-                                    </div>
+                                                    {% endif %}
+                                                     {% if item.degree == 1 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                     </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+                                                    {% endif %}
+                                                   
+
+                                                    {% if item.degree == 2 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+                                                     {% if item.degree == 3 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                    </li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+
+                                                     {% if item.degree == 4 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li><i class="ion-ios-star"></i></li>
+                                                    <li class="silver-color">
+                                                                <i class="ion-ios-star-outline"></i>
+                                                            
+                                                    </li>
+
+                                                    {% endif %}
+
+                                                    {% if item.degree == 5 %}
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+                                                     <li><i class="ion-ios-star"></i></li>
+                                                    <li><i class="ion-ios-star"></i></li>
+
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
                                     <div class="price-box">
                                         <span class="new-price new-price-2">{{item.price}} руб.</span>
                                         
@@ -283,7 +531,7 @@
                                             
                                         </ul>
                                     </div>
-                                    <div class="color-list_area">
+                                    <!--<div class="color-list_area">
                                         <div class="color-list_heading">
                                             <h4>Настройки цвета</h4>
                                         </div>
@@ -314,7 +562,7 @@
                                                 <span class="color-text">Золотой</span>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="quantity">
                                         <label>Количество</label>
                                         <div class="cart-plus-minus">
@@ -325,9 +573,7 @@
                                     </div>
                                     <div class="kenne-group_btn">
                                         <ul>
-                                            <li><a href="cart.html" class="add-to_cart">Добавить в карту</a></li>
-                                            <li><a href="cart.html"><i class="ion-android-favorite-outline"></i></a></li>
-                                            <li><a href="cart.html"><i class="ion-ios-shuffle-strong"></i></a></li>
+                                            <li><a href="{% url 'cart:cart_add' item.id %}" class="add-to_cart">Добавить в карту</a></li>
                                         </ul>
                                     </div>
                                     </div>
