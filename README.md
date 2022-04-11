@@ -1,6 +1,6 @@
-# django-shop
 
-Пример интернет магазина с использованием Django
+
+Интернет-магазин mostorg
 
 ## О проекте
 
@@ -28,10 +28,3 @@ python manage.py runserver
 ```
 
 
-## Автор
-
-* **Alexander Antoshchuk**
-
-## License
-
-Этот проект находится под лицензией MIT License - подробнее [LICENSE](LICENSE.md)
